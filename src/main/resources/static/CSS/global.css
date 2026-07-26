@@ -1,0 +1,28 @@
+:root {
+    --jungle-green: #1A3A2A;
+    --deep-earth: #2B251F;
+    --amber-amber: #D4A373;
+    --fossil-gray: #E6E1DA;
+    --bone-white: #FAEDCD;
+    
+    --success-field: #4F772D;
+    --danger-fossil: #9E2A2B;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--fossil-gray);
+    color: var(--deep-earth);
+}
+
+.bg-dark-paleo {
+    background-color: var(--deep-earth) !important;
+    color: var(--bone-white) !important;
+    border-color: var(--amber-amber) !important;
+}
+
+        body, p, ul, li, div, .text-white-50, .text-light, .lead {
+            text-align: justify !important;
+            text-justify: inter-word !important;
+            hyphens: none !important;
+   }

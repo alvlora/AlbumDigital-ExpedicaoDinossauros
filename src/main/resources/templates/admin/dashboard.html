@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedição Dinossauros | Central de Comando Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <style>
+        body, p, ul, li, div, th, td, input, h2, h4, span {
+            color: #FAEDCD !important;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(26, 21, 17, 0.80), rgba(15, 35, 26, 0.80)), 
+                        url('/img/fundo2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        
+        .sidebar-paleo {
+            background: rgba(43, 37, 31, 0.95) !important;
+            border-right: 1px solid #D4A373;
+            min-width: 260px;
+        }
+
+        .logo-img { width: 35px; height: 35px; margin-right: 10px; }
+
+        .nav-paleo .nav-link {
+            color: #E6E1DA !important;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-paleo .nav-link.active {
+            background: #D4A373 !important;
+            color: #2B251F !important;
+            font-weight: bold;
+        }
+
+        
+        .nav-logout {
+            border: 1px solid #9E2A2B !important;
+            border-radius: 12px !important;
+            color: #FFB3B3 !important;
+            margin-top: 24px !important;
+        }
+        .nav-logout:hover {
+            background: #9E2A2B !important;
+            color: #FFFFFF !important;
+        }
+
+        .content-card {
+            background: rgba(43, 37, 31, 0.7);
+            border: 1px solid #D4A373;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .search-field {
+            background-color: rgba(26, 21, 17, 0.8) !important;
+            color: #FFFFFF !important;
+            border: 1px solid #D4A373 !important;
+        }
+        .search-field::placeholder { color: #D4A373 !important; opacity: 0.8; }
+
+        
+        .table-paleo { color: #FAEDCD !important; }
+        .table-paleo thead { background-color: rgba(26, 21, 17, 0.5) !important; }
+        .table-paleo th { 
+            color: #D4A373 !important; 
+            border-bottom: 2px solid #D4A373 !important; 
+            background-color: transparent !important; 
+        }
+        .table-paleo td { color: #FAEDCD !important; background-color: transparent !important; }
+
+        
+        .btn-paleo-success { 
+            background-color: #1A3A2A; 
+            color: #FAEDCD; 
+            border: 1px solid #D4A373; }
+
+        .btn-paleo-success:hover {
+            background-color: #6daf83; 
+            color: #FFFFFF;            
+            border-color: #E6B980;     
+        }
+        .btn-action-edit, .btn-action-delete { border: 1px solid #D4A373; background: transparent; color: #FAEDCD; }
+        
+        .badge-admin { background-color: #741315 !important; }
+        .badge-autor { background-color: #104da8 !important; }
+        .badge-colec { background-color: #186441 !important; }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex" style="min-height: 100vh;">
+        <div class="sidebar-paleo p-4 d-flex flex-column">
+            <div class="d-flex align-items-center mb-2">
+                <img th:src="@{/img/placadilo.png}" src="/img/placadilo.png" class="logo-img" alt="Logo">
+                <h4 class="text-uppercase m-0" style="color: #D4A373;">Base Comando</h4>
+            </div>
+            <p class="small mb-4">Módulo de Segurança</p>
+            
+            <ul class="nav nav-pills flex-column gap-2 nav-paleo">
+                <li class="nav-item"><a th:href="@{/admin/dashboard}" class="nav-link active"><i class="bi bi-people-fill"></i> Exploradores</a></li>
+            </ul>
+
+            <a th:href="@{/logout}" class="nav-link nav-logout text-uppercase fw-bold text-center justify-content-center">
+                <i class="bi bi-box-arrow-left me-2"></i> Sair
+            </a>
+        </div>
+
+        <div class="p-4 p-md-5 w-100">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Exploradores Cadastrados</h2>
+                <a th:href="@{/admin/usuarios/novo}" class="btn btn-paleo-success">
+                    <i class="bi bi-plus-circle-fill"></i> Novo Usuário
+                </a>
+            </div>
+
+            <div class="content-card mb-4">
+                <input type="text" id="filtroPesquisa" class="form-control search-field" placeholder="Pesquisar por codinome ou perfil operacional...">
+            </div>
+
+            <div class="content-card">
+                <div class="table-responsive">
+                    <table class="table table-paleo align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nome do Explorador</th>
+                                <th>Login / Acesso</th>
+                                <th>Perfil de Operação</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="u : ${usuarios}" class="linha-usuario">
+                                <td th:text="${u.nome}">Nome</td>
+                                <td th:text="${u.login}">Login</td>
+                                <td>
+                                    <span th:text="${u.perfil}" 
+                                          th:classappend="${u.perfil == 'ADMIN' ? 'badge-admin' : (u.perfil == 'AUTOR' ? 'badge-autor' : 'badge-colec')}"
+                                          class="badge px-3 py-2 rounded-pill">Perfil</span>
+                                </td>
+                                <td class="text-center">
+                                    <a th:href="@{/admin/usuarios/editar/{id}(id=${u.id})}" class="btn btn-sm btn-action-edit me-2"><i class="bi bi-pencil-square"></i></a>
+                                    <a th:href="@{/admin/usuarios/excluir/{id}(id=${u.id})}" 
+                                       class="btn btn-sm btn-action-delete"
+                                       onclick="return confirm('Tem certeza que deseja banir este explorador?')">
+                                       <i class="bi bi-trash3-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('filtroPesquisa').addEventListener('input', function(e) {
+            const termo = e.target.value.toLowerCase();
+            document.querySelectorAll('.linha-usuario').forEach(linha => {
+                linha.style.display = linha.textContent.toLowerCase().includes(termo) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

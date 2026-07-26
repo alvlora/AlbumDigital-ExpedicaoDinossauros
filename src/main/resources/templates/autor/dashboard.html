@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedição Dinossauros | Painel Autor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <style>
+        body {
+            background: linear-gradient(rgba(26, 21, 17, 0.80), rgba(15, 35, 26, 0.80)), 
+                        url('/img/jurassicwallpaper.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #FAEDCD;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        h2, h4 { color: #FAEDCD; }
+
+        .sidebar-paleo {
+            background: rgba(43, 37, 31, 0.95) !important;
+            border-right: 1px solid #D4A373;
+            min-width: 260px;
+        }
+
+        .logo-img { width: 35px; height: 35px; margin-right: 10px; }
+
+        .nav-paleo .nav-link {
+            color: #E6E1DA !important;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .nav-paleo .nav-link i { color: #D4A373 !important; }
+        .nav-paleo .nav-link:hover {
+            background: rgba(212, 163, 115, 0.1) !important;
+            color: #FFF !important;
+        }
+
+        .nav-paleo .nav-link.active {
+            background: #D4A373 !important;
+            color: #2B251F !important;
+            font-weight: bold;
+        }
+
+        .nav-paleo .nav-link.active i { color: #2B251F !important; }
+
+        .nav-logout {
+            border: 1px solid #9E2A2B !important;
+            border-radius: 12px !important;
+            color: #FFB3B3 !important;
+            margin-top: 24px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .nav-logout:hover {
+            background: #9E2A2B !important;
+            color: #FFFFFF !important;
+        }
+
+        .content-card {
+            background: rgba(43, 37, 31, 0.7);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(8px);
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(212, 163, 115, 0.2), rgba(26, 58, 42, 0.4));
+            border-left: 5px solid #D4A373;
+        }
+
+        .feature-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(212, 163, 115, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #D4A373;
+            background: rgba(43, 37, 31, 0.5);
+            color: #FFF;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+        }
+        .step-item::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 24px;
+            bottom: -22px;
+            width: 2px;
+            background: rgba(212, 163, 115, 0.3);
+        }
+        .step-item:last-child::before { display: none; }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #D4A373;
+            color: #2B251F;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex" style="min-height: 100vh;">
+        <div class="sidebar-paleo p-4 d-flex flex-column">
+            <div class="d-flex align-items-center mb-2">
+                <img th:src="@{/img/placaptero.png}" src="/img/placaptero.png" class="logo-img" alt="Logo">
+                <h4 class="text-uppercase m-0" style="color: #D4A373;">Painel Autor</h4>
+            </div>
+            <p class="small mb-4 text-white-50">Módulo de Gestão</p>
+            
+            <ul class="nav nav-pills flex-column gap-2 nav-paleo">
+                <li class="nav-item">
+                    <a th:href="@{/autor/dashboard}" class="nav-link active">
+                        <i class="bi bi-house-door-fill"></i> Início
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/autor/figurinhas}" class="nav-link">
+                        <i class="bi bi-images"></i> Figurinhas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/autor/albuns}" class="nav-link">
+                        <i class="bi bi-journal-album"></i> Álbuns
+                    </a>
+                </li>
+            </ul>
+
+            <a th:href="@{/sair}" class="nav-link nav-logout text-uppercase fw-bold text-center">
+                <i class="bi bi-box-arrow-left"></i> Sair
+            </a>
+        </div>
+
+        <div class="p-4 p-md-5 w-100" style="max-width: 1200px;">
+            
+            <div class="content-card welcome-banner mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="fw-bold mb-2">Saudações, Guardião do Codex! 🦖</h2>
+                        <p class="lead m-0 text-white-75" style="font-size: 1.1rem;">
+                            Bem-vindo ao centro de comando de dados paleontológicos. Aqui você gerencia a distribuição global dos ecossistemas e espécies da expedição.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="text-uppercase mb-3 small fw-bold tracking-wider" style="color: #D4A373;">Ações Rápidas de Gerenciamento</h4>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-4">
+                    <a th:href="@{/autor/figurinhas/nova}" class="card feature-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success-subtle p-3 rounded-3 text-success me-3">
+                                <i class="bi bi-plus-circle h3 m-0"></i>
+                            </div>
+                            <h5 class="m-0 fw-bold">Cadastrar Espécie</h5>
+                        </div>
+                        <p class="small text-white-50 m-0">Gere novos registros de DNA/Figurinhas inserindo fotos, numeração mapeada, páginas e as chaves de clonagem (TAG).</p>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a th:href="@{/autor/figurinhas}" class="card feature-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-warning-subtle p-3 rounded-3 text-warning me-3">
+                                <i class="bi bi-images h3 m-0"></i>
+                            </div>
+                            <h5 class="m-0 fw-bold">Verificar Catálogo</h5>
+                        </div>
+                        <p class="small text-white-50 m-0">Monitore o acervo atual de espécies existentes. Busque, edite dados biológicos ou limpe registros corrompidos.</p>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a th:href="@{/autor/albuns}" class="card feature-card p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-info-subtle p-3 rounded-3 text-info me-3">
+                                <i class="bi bi-journal-album h3 m-0"></i>
+                            </div>
+                            <h5 class="m-0 fw-bold">Gerenciar Álbuns</h5>
+                        </div>
+                        <p class="small text-white-50 m-0">Supervisione e expanda os ecossistemas ativos (Ex: Bio-Reserve, Expedição Dinossauros) determinando a volumetria de páginas.</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h4 class="fw-bold mb-4"><i class="bi bi-bezier2 me-2" style="color: #D4A373;"></i>Como funciona o Fluxo do Sistema</h4>
+                
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h6 class="fw-bold m-0 text-white">Criar ou validar o Álbum</h6>
+                    <p class="small text-white-50 mb-0">Para que uma figurinha possa ser injetada, um ecossistema (Álbum) correspondente com páginas ativas precisa existir no sistema.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h6 class="fw-bold m-0 text-white">Vincular a Tag de DNA (Cromos)</h6>
+                    <p class="small text-white-50 mb-0">Ao cadastrar um dinossauro, defina uma TAG única (Ex: <code>DIN-001</code>). Essa chave carregará as informções do espécime na área de descrição.</p>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h6 class="fw-bold m-0 text-white">Gerenciamento de Imagens</h6>
+                    <p class="small text-white-50 mb-0">Certifique-se de realizar uploads de arquivos otimizados para evitar estouros de memória do servidor ao carregar o álbum dinâmico.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

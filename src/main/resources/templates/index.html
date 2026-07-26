@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedição Dinossauros | Inicializando</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .splash-bg { 
+            background: linear-gradient(rgba(15, 35, 26, 0.85), rgba(15, 35, 26, 0.95)), 
+                        url('/img/fundo-paleo.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden;
+        }
+        .glass-card {
+            background: rgba(43, 37, 31, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 163, 115, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .tracks-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 65px;
+            margin-bottom: 1.5rem;
+        }
+
+        .dino-track-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(212, 163, 115, 0.6)) sepia(1) saturate(5) hue-rotate(10deg);
+            animation: walkStep 2.8s ease-in-out infinite;
+        }
+
+        .track-left { transform: rotate(-12deg); }
+        .track-right { transform: rotate(12deg); }
+
+        .track-1 { animation-delay: 0.2s; }
+        .track-2 { animation-delay: 0.7s; }
+        .track-3 { animation-delay: 1.2s; }
+        .track-4 { animation-delay: 1.7s; }
+
+        @keyframes walkStep {
+            0% { opacity: 0; transform: scale(0.7) var(--rotation, rotate(0deg)); }
+            15% { opacity: 1; transform: scale(1.05) var(--rotation, rotate(0deg)); }
+            30% { opacity: 0.6; transform: scale(1) var(--rotation, rotate(0deg)); }
+            80% { opacity: 0.6; }
+            100% { opacity: 0; }
+        }
+
+        .track-left { --rotation: rotate(-12deg); }
+        .track-right { --rotation: rotate(12deg); }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-glow {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #D4A373, #FAEDCD);
+            animation: loadProgress 3.8s linear forwards;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .btn-skip {
+            color: #FAEDCD;
+            border: 1px solid rgba(212, 163, 115, 0.4);
+            padding: 0.3rem 1.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-skip:hover {
+            background-color: #D4A373;
+            color: #2B251F;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="splash-bg">
+        <div class="glass-card">
+            
+            <div class="tracks-container">
+                <img src="/img/pegada.png" class="dino-track-img track-left track-1" alt="Passo 1">
+                <img src="/img/pegada.png" class="dino-track-img track-right track-2" alt="Passo 2">
+                <img src="/img/pegada.png" class="dino-track-img track-left track-3" alt="Passo 3">
+                <img src="/img/pegada.png" class="dino-track-img track-right track-4" alt="Passo 4">
+            </div>
+            
+            <h1 style="color: #FAEDCD; font-family: sans-serif; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; font-size: 1.8rem; font-weight: 700;">
+                Álbum Dinossauros
+            </h1>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-bottom: 1.5rem; letter-spacing: 0.5px;">SISTEMA DE GESTÃO E COLEÇÃO</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar-glow"></div>
+            </div>
+            
+            <div>
+                <a href="/home" class="btn-skip">
+                    Pular
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = '/home';
+        }, 4000);
+    </script>
+</body>
+</html>
