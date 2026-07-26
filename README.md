@@ -1,4 +1,4 @@
-# -lbum-Digital-Expedi-o-Dinossauros
+# -Album-Digital-Expedicao-Dinossauros
 Este projeto consiste em um álbum de figurinhas digital com temática de dinossauros.
 É um projeto criado para faculdade em conjunto com um colega, feito para aperfeiçoar nossos conhecimentos até então.
 O sistema permite que colecionadores criem uma conta, acessem seu álbum e expandam sua coleção por meio de um sistema de escavação.
